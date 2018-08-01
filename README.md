@@ -12,6 +12,8 @@ Ubuntu: Following script changes keyboard input language to English after lockin
 2. Click add new
 3. Give it a "name" and "comment" 
 4. Set command field: "nohup /usr/local/bin/lockscreen_lang_switcher.sh &"
+<img src="/image.png" alt="Image"/>
+
 5. Restart, switch language to other than EN, press CMD + L
 6. Try logging in
 
