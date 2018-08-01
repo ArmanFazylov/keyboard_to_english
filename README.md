@@ -20,5 +20,5 @@ Enjoy it!
 
 ### PS. to kill script use:
 ```
-	ps ax | grep "[l]ockscreen_lang_switcher.sh " | cut -d' ' -f2 | xargs kill
+	ps ax | grep "[l]ockscreen_lang_switcher.sh" | grep -v grep | awk '{print $2}' | xargs kill
 ```
