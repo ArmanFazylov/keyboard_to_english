@@ -3,10 +3,11 @@
 export DISPLAY=:0
 
 # If an option is not provided, make the layout to switch to "0", otherwise take the specified number
-if [ -z ${1+x} ]; then
-    layout="0"
-else
-    layout=$1
+layout="${1:-0}"
+
+if ! [ "$layout" -ge 0 ]; then
+  echo "Layout specified must be a number"
+  exit 1
 fi
 
 function ubuntu_16_04_monitor {
