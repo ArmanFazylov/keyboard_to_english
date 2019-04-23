@@ -11,15 +11,13 @@ if ! [ "$layout" -ge 0 ]; then
 fi
 
 function ubuntu_16_04_monitor {
-    LOCK_STAT=`echo $1 | awk '{print $NF}'`
-    if [[ "$LOCK_STAT" == "member=Locked" ]]; then
+    if awk '($(NF) == "member=Locked") { exit 0 } { exit 1 }' <<< $1; then
         /usr/bin/gsettings set org.gnome.desktop.input-sources current $layout
     fi
 }
 
-function ubuntu_18_04_monitor {
-    LOCK=`echo $1 | grep -v false`
-    if [[ "$LOCK" ]]; then
+function ubuntu_18_04_monitor {    
+    if grep -v -q false <<< $1; then
         gdbus call --session --dest org.gnome.Shell \
             --object-path /org/gnome/Shell \
             --method org.gnome.Shell.Eval \
