@@ -10,9 +10,11 @@ if ! [ "$layout" -ge 0 ]; then
   exit 1
 fi
 
+release_version=$(lsb_release -rs)
+
 function ubuntu_16_04_monitor {
     if awk '($(NF) == "member=Locked") { exit 0 } { exit 1 }' <<< $1; then
-        /usr/bin/gsettings set org.gnome.desktop.input-sources current $layout
+        /usr/bin/gsettings set org.gnome.desktop.input-sources current "$layout"
     fi
 }
 
@@ -25,14 +27,13 @@ function ubuntu_18_04_monitor {
     fi
 }
 
-
-if [[ "$(lsb_release -rs)" == "16.04" ]]; then
+if [[ "$release_version" == "16.04" ]]; then
     dbus_signal="type=signal,interface=com.canonical.Unity.Session,member=Locked"
     dbus-monitor --session "$dbus_signal" | 
     while read MSG; do
         ubuntu_16_04_monitor "$MSG"
     done
-elif [[ "$(lsb_release -rs)" == "18.04" ]]; then
+elif [[ "$release_version" == "18.04" ]]; then
     dbus_signal="type=signal,interface=org.gnome.ScreenSaver,member=ActiveChanged"
     dbus-monitor --session "$dbus_signal" | 
     while read MSG; do
