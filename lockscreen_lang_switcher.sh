@@ -17,12 +17,12 @@ function ubuntu_16_04_monitor {
 }
 
 function ubuntu_18_04_monitor {
-    UNLOCK=`echo $1 | grep false`
-    if [[ "$UNLOCK" ]]; then
+    LOCK=`echo $1 | grep -v false`
+    if [[ "$LOCK" ]]; then
         gdbus call --session --dest org.gnome.Shell \
             --object-path /org/gnome/Shell \
             --method org.gnome.Shell.Eval \
-            "imports.ui.status.keyboard.getInputSourceManager().inputSources[${layout}].activate()";
+            "imports.ui.status.keyboard.getInputSourceManager().inputSources[${layout}].activate()"
     fi
 }
 
