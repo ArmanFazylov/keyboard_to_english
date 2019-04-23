@@ -1,6 +1,7 @@
 
-# keyboard_to_english
-Ubuntu: Following script changes keyboard input language to English after locking screen by pressing CMD + L.
+# lockscreen_layout_switcher
+Ubuntu 16.04 and 18.04: The included script (`lockscreen_lang_switcher.sh`) switches the keyboard layout to the first layout (or the specified layout)
+when the system is unlocked.
 
 ### Installation instructions:
 
@@ -11,10 +12,11 @@ Ubuntu: Following script changes keyboard input language to English after lockin
 1. Search "Startup Applications" on your Ubuntu machine
 2. Click add new
 3. Give it a "name" and "comment" 
-4. Set command field: "nohup /usr/local/bin/lockscreen_lang_switcher.sh &"
+4. Set command field: "nohup /usr/local/bin/lockscreen_lang_switcher.sh [layout_number] &"
 <img src="/image.png" alt="Image"/>
+`layout_number` follows the order you see when normally switching layouts, with first layout corresponding to zero.
 
-5. Restart, switch language to other than EN, press CMD + L
+5. Restart, switch language to other than the specified layout, press CMD + L
 6. Try logging in
 
 Enjoy it!
